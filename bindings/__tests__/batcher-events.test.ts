@@ -410,3 +410,24 @@ describe("decodeBatcherEvents / correlateBatcherEvents", () => {
     );
   });
 });
+
+// ── Stable-ABI literal-value assertions (closes #918) ─────────────────────────
+
+describe("BATCHER_CONTRACT_TAG literal value (closes #918)", () => {
+  it("equals exactly 'mux_bat'", () => {
+    expect(BATCHER_CONTRACT_TAG).toBe("mux_bat");
+  });
+});
+
+describe("BATCHER_EVENT_TOPICS literal values (closes #918)", () => {
+  it("deep-equals the six documented key/value pairs", () => {
+    expect(BATCHER_EVENT_TOPICS).toEqual({
+      init: "init",
+      bat_start: "bat_start",
+      executed: "executed",
+      bat_ok: "bat_ok",
+      bat_abort: "bat_abort",
+      sim_done: "sim_done",
+    });
+  });
+});
