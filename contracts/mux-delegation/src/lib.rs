@@ -317,10 +317,12 @@ impl MuxDelegation {
 
     /// Write-once self-registration of this contract's own address.
     ///
-    /// The `admin` parameter is the caller authorising this specific call
-    /// (`admin.require_auth()`) and is **not** the same as the `DataKey::Admin`
-    /// set by `initialize`. Any address may call `link_contract_id` by naming
-    /// itself as `admin`.
+    /// **Authorization:** the `admin` parameter must authorize this call via
+    /// `admin.require_auth()`. This is an _inline_ auth check on the supplied
+    /// address — it is entirely independent of `DataKey::Admin` set by
+    /// `initialize`. Any address may act as the `admin` argument here;
+    /// `initialize` need not have been called first. The chosen authorizer is
+    /// not stored and has no further privileges after this call succeeds.
     ///
     /// Returns `ContractIdAlreadySet` if called more than once.
     ///
